@@ -14,7 +14,7 @@ import {
 } from "recharts";
 import { getData } from "../../lib/fetch";
 
-export default function pantauSawah({ isAuth }) {
+export default function PantauSawah({ isAuth }) {
   const [dataEsp, setDataEsp] = useState([]);
   const [hour, setHour] = useState("");
   const [minute, setMinute] = useState("");
