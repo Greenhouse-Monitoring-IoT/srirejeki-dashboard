@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import Layout from "../components/Layout";
+import Layout from "../Layout";
 
 export default function Tools({ data }) {
   const [field, setField] = useState({});

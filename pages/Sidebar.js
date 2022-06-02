@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import classNames from "classnames";
 import Link from "next/link";
-import CollapsIcon from "./icons/CollapsIcon";
-import HomeIcon from "./../components/icons/HomeIcon";
-import UsersIcon from "./../components/icons/UsersIcon";
-import ArticleIcon from "./../components/icons/ArticleIcon";
-import LogoutIcon from "./../components/icons/LogoutIcon";
-import Logo from "./../components/icons/Logo";
+import CollapsIcon from "../lib/components/icons/CollapsIcon";
+import HomeIcon from "../lib/components/icons/HomeIcon";
+import UsersIcon from "../lib/components/icons/UsersIcon";
+import ArticleIcon from "../lib/components/icons/ArticleIcon";
+import LogoutIcon from "../lib/components/icons/LogoutIcon";
+import Logo from "../lib/components/icons/Logo";
 
 const Sidebar = ({}) => {
   const [isAuth, setIsAuth] = useState(false);
