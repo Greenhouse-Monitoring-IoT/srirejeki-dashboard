@@ -7,28 +7,9 @@ export default function Profil() {
   const [dataUser, setdataUser] = useState({});
   const [isAuth, setIsAuth] = useState();
   const router = useRouter();
-  async function getSession(e) {
-    const token = localStorage.getItem("token");
-    const req = await fetch("http://20.124.124.81/auth/", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + String(token),
-      },
-    });
-    const res = await req.json();
-    setdataUser({
-      ...dataUser,
-      id: res.payload.id,
-      name: res.payload.name,
-      phonenumber: res.payload.phonenumber,
-    });
-    console.log(dataUser);
-  }
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    getSession();
     if (token) {
       setIsAuth(true);
     } else {

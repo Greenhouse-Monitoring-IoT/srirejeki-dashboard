@@ -160,11 +160,13 @@ export default function Login() {
                         d="M10 19l-7-7m0 0l7-7m-7 7h18"
                       />
                     </svg>
-                    <a href="/">
-                      <span className="inline-block ml-1">
-                        Kembali ke Beranda
-                      </span>
-                    </a>
+                    <Link href="/">
+                      <a>
+                        <span className="inline-block ml-1">
+                          Kembali ke Beranda
+                        </span>
+                      </a>
+                    </Link>
                   </button>
                 </div>
               </div>

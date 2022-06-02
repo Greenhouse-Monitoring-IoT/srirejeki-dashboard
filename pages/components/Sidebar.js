@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import classNames from "classnames";
 import Link from "next/link";
@@ -9,7 +9,7 @@ import ArticleIcon from "./../components/icons/ArticleIcon";
 import LogoutIcon from "./../components/icons/LogoutIcon";
 import Logo from "./../components/icons/Logo";
 
-const Sidebar = () => {
+const Sidebar = ({}) => {
   const [isAuth, setIsAuth] = useState(false);
   const router = useRouter();
 
@@ -45,10 +45,9 @@ const Sidebar = () => {
   const [togCollapse, setTogCollapse] = useState(false);
   const [isCollapsable, setIsCollapsable] = useState(false);
 
-  const activeMenu = useMemo(
-    () => menuitems.find((menu) => menu.link === router.pathname),
-    [router.pathname]
-  );
+  const activeMenu = ({}) => {
+    menuitems.find((menu) => menu.link === router.pathname), [router.pathname];
+  };
 
   const wrapperClasses = classNames(
     "max-h-max px-4 pt-8 pb-4 flex justify-between flex-col w-80 bg-gray-100",

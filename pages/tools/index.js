@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Layout from "../components/Layout";
 
-export default function tools() {
+export default function Tools({ data }) {
   const [field, setField] = useState({});
   const [isAuth, setIsAuth] = useState();
   const router = useRouter();
