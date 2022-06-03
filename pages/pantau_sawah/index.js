@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../Layout";
 import className from "classnames";
-import { useRouter } from "next/router";
 import {
   LineChart,
   ResponsiveContainer,
@@ -15,10 +14,13 @@ import {
 import { getData } from "../../lib/fetch";
 
 export default function PantauSawah({ isAuth }) {
+  const [clientId, setClientId] = useState("ac67b238af10");
   const [dataEsp, setDataEsp] = useState([]);
   const [hour, setHour] = useState("");
   const [minute, setMinute] = useState("");
-  let num = 0;
+  const [actionPump, setActionPump] = useState(0);
+  const [actionLamp, setActionLamp] = useState(1);
+
   useEffect(() => {
     const date = new Date();
     const timer = setInterval(async () => {
@@ -30,32 +32,44 @@ export default function PantauSawah({ isAuth }) {
       }
 
       const getHumidity = await getData(
-        "data/subscribe?topic=srirejeki/client/78e36d093868/humidity",
+        "data/subscribe?topic=srirejeki/client/" + clientId + "/humidity",
         isAuth
       );
+
       const getTemperature = await getData(
-        "data/subscribe?topic=srirejeki/client/78e36d093868/temperature",
+        "data/subscribe?topic=srirejeki/client/" + clientId + "/temperature",
         isAuth
       );
+
+      const getLight = await getData(
+        "data/subscribe?topic=srirejeki/client/" + clientId + "/light",
+        isAuth
+      );
+
+      const getWwater = await getData(
+        "data/subscribe?topic=srirejeki/client/" + clientId + "/water",
+        isAuth
+      );
+
       setDataEsp([
         ...dataEsp,
         {
           time: hour + ":" + minute,
-          value_temp: Math.random() * 5,
-          value_hum: Math.random() * 10 - 2,
+          value_temp: getTemperature.data,
+          value_hum: getHumidity.data,
           value_light: Math.random() * 5,
           value_water: Math.random() * 10 - 2,
         },
       ]);
-    }, 2500);
+    }, 5000);
+
     let length = dataEsp.length;
-    if (length === 10) {
+    if (length === 11) {
       dataEsp.splice(0, 1);
     }
     return () => clearInterval(timer);
   });
 
-  num = num + 1;
   const monitor = className(
     "flex items-center max-w-full rounded overflow-hidden shadow-lg w-100 py-8 pr-8"
   );
@@ -86,10 +100,12 @@ export default function PantauSawah({ isAuth }) {
                   <div className="py-4">
                     <label className="inline-flex relative items-center cursor-pointer">
                       <input
+                        onChange=""
                         type="checkbox"
-                        value=""
+                        value="1"
                         id="checked-toggle1"
                         className="sr-only peer"
+                        checked={actionLamp === 1}
                       />
                       <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                     </label>
@@ -106,6 +122,7 @@ export default function PantauSawah({ isAuth }) {
                   <div className="py-4">
                     <label className="inline-flex relative items-center cursor-pointer">
                       <input
+                        onChange=""
                         type="checkbox"
                         value=""
                         id="checked-toggle2"

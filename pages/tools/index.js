@@ -48,7 +48,7 @@ export default function Tools({ data }) {
   const [dataEsp, setDataEsp] = useState([]);
   async function getDataEsp(e) {
     const token = localStorage.getItem("token");
-    const req = await fetch("http://36.80.229.25/mcu/user", {
+    const req = await fetch("http://20.124.124.81/mcu/user", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
