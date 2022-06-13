@@ -1,3 +1,4 @@
+//Import library yang terdapat di framework NextJs
 import React, { useEffect, useState } from "react";
 import Layout from "../Layout";
 import className from "classnames";
@@ -21,8 +22,14 @@ export default function PantauSawah({ isAuth }) {
   const [actionPump, setActionPump] = useState(0);
   const [actionLamp, setActionLamp] = useState(1);
 
+  //Fungsi ini akan dijalankan sekali
   useEffect(() => {
+    //Fungsi ini membuat object baru dari class bawaan javascript
     const date = new Date();
+
+    //Fungsi setInterval akan dijalankan berkali-kali dengan interval yang kita tentukan. Pada program ini interval di set 5 detik.
+    //Setiap 5 detik maka program akan mengambil data dari server dengan alamat endpoint yang sudah di tentukan pada library fetch.js
+    //fungsi setinterval juga dijalankan secara asinkron dan akan mengambil data untuk humidity, temperature, light, dan water
     const timer = setInterval(async () => {
       setHour(String(date.getHours()));
       if (date.getMinutes().length < 3) {
@@ -51,6 +58,7 @@ export default function PantauSawah({ isAuth }) {
         isAuth
       );
 
+      //Fungsi ini akan menambahkan data yang sudah didapat dari server ke dalam state DataESP secara terus menerus ke index terakhir
       setDataEsp([
         ...dataEsp,
         {
@@ -63,21 +71,30 @@ export default function PantauSawah({ isAuth }) {
       ]);
     }, 5000);
 
+    //Fungsi ini akan mengecek panjang array DataESP yang telah ditambahkan secara terus-menerus.
+    //Apabila panjang DataESP sudah mencapai 11 data maka data terlama yaitu index ke 1.
+    //Jadi data akan ditambah ke index terakhir dan data pertama akan dihapus jika panjang data sudah 11.
     let length = dataEsp.length;
     if (length === 11) {
       dataEsp.splice(0, 1);
     }
+
     return () => clearInterval(timer);
   });
 
+  //Variabel untuk menyimpan class yang digunakan
   const monitor = className(
     "flex items-center max-w-full rounded overflow-hidden shadow-lg w-100 py-8 pr-8"
   );
 
+  //Variabel untuk menyimpan class yang digunakan
   const monitorTitle = className(
     "text-gray-700 text-base flex justify justify-center py-4 font-semibold"
   );
 
+  //Return ini berupa tampilan dashboard pemantauan sawah web yang akan ditampilan pada halaman utama.
+  //Untuk bentuk dari return ini merupakan bentuk html biasa.
+  //Sintaks yang digunakan juga sama hanya di embed pada file javascript.
   return (
     <Layout>
       <div className="w-full pb-10">

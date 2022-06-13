@@ -1,6 +1,6 @@
 import React from "react";
 import Sidebar from "./Sidebar";
-
+//Layout kerangka dasar dari semua tampilan dashboard
 const Layout = ({ children }) => {
   return (
     <div className="max-h-max flex flex-row justify">

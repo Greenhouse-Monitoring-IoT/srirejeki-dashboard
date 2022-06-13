@@ -1,3 +1,4 @@
+//Import library yang terdapat di framework NextJs dan komponen lainnya seperti logo
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import classNames from "classnames";
@@ -13,6 +14,8 @@ const Sidebar = ({}) => {
   const [isAuth, setIsAuth] = useState(false);
   const router = useRouter();
 
+  //Fungsi untuk melakukan operasi logout dari session autentikasi. Fungsi ini dijalankan seara asinkron dan akan menghapus token yang tersimpan
+  //di local storage
   async function doSignout(e) {
     const token = localStorage.getItem("token");
     try {
@@ -35,6 +38,7 @@ const Sidebar = ({}) => {
     router.push("/auth/login");
   }
 
+  //Daftar menu samping yang ditampilkan, bisa diubah dan akan otomatis tertampil pada sidebar dashboard
   const menuitems = [
     { id: 1, label: "Beranda", icon: HomeIcon, link: "/" },
     { id: 2, label: "Profil", icon: UsersIcon, link: "/profil" },
@@ -42,6 +46,7 @@ const Sidebar = ({}) => {
     { id: 4, label: "Monitoring", icon: CollapsIcon, link: "/pantau_sawah" },
   ];
 
+  //State untuk mengaktifkan dan menonaktifkan tampilan menu yang ramping atau lengkap
   const [togCollapse, setTogCollapse] = useState(false);
   const [isCollapsable, setIsCollapsable] = useState(false);
 
@@ -49,6 +54,7 @@ const Sidebar = ({}) => {
     menuitems.find((menu) => menu.link === router.pathname), [router.pathname];
   };
 
+  //Variabel untuk menyimpan tampilan tailwind CSS untuk bagian menu
   const wrapperClasses = classNames(
     "max-h-max px-4 pt-8 pb-4 flex justify-between flex-col w-80 bg-gray-100",
     {
@@ -66,6 +72,7 @@ const Sidebar = ({}) => {
     );
   };
 
+  //Variabel untuk menyimpan tampilan tailwind CSS untuk bagian menu sesuai dengan status toggle
   const collapseIconClasses = classNames(
     "p-4 rounded bg-light-lighter absolute right-0",
     {
@@ -81,6 +88,8 @@ const Sidebar = ({}) => {
     setTogCollapse(!togCollapse);
   };
 
+  //Return ini berupa tampilan sidebar web yang akan ditampilan pada setiap halaman dashboard.
+  //Untuk bentuk dari return ini merupakan bentuk html biasa. Sintaks yang digunakan juga sama hanya di embed pada file javascript
   return (
     <div
       className={wrapperClasses}

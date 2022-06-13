@@ -1,0 +1,40 @@
+    async function getStateLamo() {
+      const statePump = await getData(
+        "data/subscribe?topic=srirejeki/client/" + clientId + "/lamp",
+        isAuth
+      );
+      setActionPump(parseInt(statePump));
+    }
+
+    async function getStatePump() {
+      const stateLamp = await getData(
+        "data/subscribe?topic=srirejeki/client/" + clientId + "/lamp",
+        isAuth
+      );
+      setActionPump(parseInt(stateLamp));
+    }
+    async function publishPump() {
+        if (statePump === 1) {
+          setActionPump(0);
+        } else {
+          setActionPump(1);
+        }
+        console.log(actionPump);
+        const pubPump = await postData(
+          "data/publish?topic=srirejeki/client/" + clientId + "/pump",
+          isAuth
+        );
+      }
+    
+      async function publishLamp() {
+        if (stateLamp === 1) {
+          setActionPump(0);
+        } else {
+          setActionPump(1);
+        }
+        console.log(actionPump);
+        const pubLamp = await postData(
+          "data/publish?topic=srirejeki/client/" + clientId + "/lamp",
+          isAuth
+        );
+      }

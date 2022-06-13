@@ -1,3 +1,4 @@
+//Import library yang terdapat di framework NextJs dan komponen lainnya seperti Rechart JS untuk menampilkan grafik
 import Layout from "./Layout";
 import classNames from "classnames";
 import {
@@ -12,6 +13,7 @@ import {
 } from "recharts";
 
 export default function Home() {
+  //Variabel untuk menyimpan class html berupa class dari Tailwind CSS
   const monitor = classNames(
     "flex items-center max-w-full rounded overflow-hidden shadow-lg w-100 py-8 pr-8"
   );
@@ -19,6 +21,9 @@ export default function Home() {
   const monitorTitle = classNames(
     "text-gray-700 text-base flex justify justify-center py-4 font-semibold"
   );
+
+  //Return ini berupa tampilan dashboard web yang akan ditampilan pada halaman utama.
+  //Untuk bentuk dari return ini merupakan bentuk html biasa. Sintaks yang digunakan juga sama hanya di embed pada file javascript.
   return (
     <Layout>
       <div className="w-full pb-10">

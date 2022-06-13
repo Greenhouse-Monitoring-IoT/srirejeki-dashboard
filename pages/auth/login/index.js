@@ -8,6 +8,7 @@ export default function Login() {
   const [isAuth, setIsAuth] = useState(false);
   const router = useRouter();
 
+  //Fungsi ini akan memasukkan setiap perubahan dari form ke dalam variable field
   function setValue(e) {
     const target = e.target;
     const name = target.name;
@@ -20,6 +21,7 @@ export default function Login() {
     console.log(field);
   }
 
+  //Fungsi ini akan melakukan proses autentikasi dan proses signin
   async function doSignin(e) {
     e.preventDefault();
     const signin = await postData("auth/signin", isAuth, field);
@@ -31,6 +33,9 @@ export default function Login() {
     }
   }
 
+  //Fungsi dalam Hooks useEffect ini akan dijalankan sekali.
+  //Didalam fungsi ini terdapat variabel yang mengambil isi dari token bearer di web local storage.
+  //jika ada tokennya, maka autentikasi akan dijadikan true jika tidak maka autentikasi akan dijadikan false.
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -40,6 +45,8 @@ export default function Login() {
     }
   }, []);
 
+  //Nilai boolean dari autentikasi ini akan dijadikan pengecekan pertama kali setiap membuka halaman.
+  //Jika bsudah terautentikasi maka redirect ke halaman pantau_sawah
   if (isAuth == true) {
     router.push("/pantau_sawah");
   } else {
